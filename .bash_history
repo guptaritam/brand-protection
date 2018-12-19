@@ -136,3 +136,18 @@ ls -ltr
 cd contract
 ls
 cat DataManager.sol
+sudo su
+exit
+ls
+cd brand_protection
+ls
+cd backend
+ls
+ls -d
+ls -l
+cd /var/www/html/brand_protection/backend
+ls 
+ls
+sudo su
+sudo su 
+exit 

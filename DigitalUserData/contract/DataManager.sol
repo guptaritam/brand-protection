@@ -3,7 +3,7 @@ pragma solidity ^ 0.4.17;
 contract DataManager{
     
     uint businessId;
-    string brandName; 
+    string brandSerialId; 
     uint32 brandImageHash;
     
     struct business{
@@ -17,14 +17,14 @@ contract DataManager{
     
     struct brand{
         uint businessId; 
-        string additionalParametersJson; //includes : uint brandSerialId, uint256 startDate, string classList, string brandDescription, string brandUseLocation
+        string additionalParametersJson; //includes : uint brandName, uint256 startDate, string classList, string brandDescription, string brandUseLocation
         bool isUsed; 
         bool isLive;
         uint256 expiredOn;
     }
     
     struct brandImage{
-        string brandName;
+        string brandSerialId;
         string imageTitle;
         string imageDescription;
     }
@@ -37,8 +37,8 @@ contract DataManager{
     mapping(uint32 => bool) isBrandImageRegistered;
     
     event BusinessEvent(string _actionPerformed, uint _businessId, string _businessName, string _businessAddress, string _businessCity, string _businessState, string _businessCountryCode, string _businessZipCode, uint256 _timestamp);
-    event BrandEvent(string _actionPerformed, uint _businessId, string _brandName,  string _additionalParametersJson, bool _isUsed, bool _isLive, uint256 _expiredOn, uint256 _timestamp);
-    event BrandImageEvent(string _actionPerformed, string _brandName, uint32 _brandImageHash, string _imageTitle, string _imageDescription, uint256 _timestamp);
+    event BrandEvent(string _actionPerformed, uint _businessId, string _brandSerialId,  string _additionalParametersJson, bool _isUsed, bool _isLive, uint256 _expiredOn, uint256 _timestamp);
+    event BrandImageEvent(string _actionPerformed, string _brandSerialId, uint32 _brandImageHash, string _imageTitle, string _imageDescription, uint256 _timestamp);
     
     function registerBusiness(uint _businessId, string _businessName, string _businessAddress, string _businessCity, string _businessState, string _businessCountryCode, string _businessZipCode){
         require(isBusinessRegistered[_businessId] == false);
@@ -72,64 +72,65 @@ contract DataManager{
         return ("null", "null", "null", "null", "null", "null");
     }
     
-    function registerBrand(string _brandName, uint _businessId, string _additionalParametersJson){
-        require(isBrandRegistered[_brandName] == false && isBusinessRegistered[_businessId] == true);
-        brands[_brandName].businessId = _businessId;
-        brands[_brandName].additionalParametersJson = _additionalParametersJson;
-        brands[_brandName].isUsed = false;
-        brands[_brandName].isLive = true;
-        brands[_brandName].expiredOn = 0; 
-        isBrandRegistered[_brandName] = true;
+    function registerBrand(string _brandSerialId, uint _businessId, string _additionalParametersJson){
+        require(isBrandRegistered[_brandSerialId] == false && isBusinessRegistered[_businessId] == true);
+        brands[_brandSerialId].businessId = _businessId;
+        brands[_brandSerialId].additionalParametersJson = _additionalParametersJson;
+        brands[_brandSerialId].isUsed = false;
+        brands[_brandSerialId].isLive = true;
+        brands[_brandSerialId].expiredOn = 0; 
+        isBrandRegistered[_brandSerialId] = true;
         
-        BrandEvent("REGISTERED", _businessId, _brandName, _additionalParametersJson, brands[_brandName].isUsed, brands[_brandName].isLive, brands[_brandName].expiredOn, now);
+        BrandEvent("REGISTERED", _businessId, _brandSerialId, _additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn, now);
     }
     
-    function updateBrand(string _brandName, uint _businessId, string _additionalParametersJson){
-        require(isBrandRegistered[_brandName] == true);
-        brands[_brandName].businessId = _businessId;
+    function updateBrand(string _brandSerialId, uint _businessId, string _additionalParametersJson){
+        require(isBrandRegistered[_brandSerialId] == true);
+        brands[_brandSerialId].businessId = _businessId;
+        brands[_brandSerialId].additionalParametersJson = _additionalParametersJson;
         
-        BrandEvent("UPDATED", _businessId, _brandName, _additionalParametersJson, brands[_brandName].isUsed, brands[_brandName].isLive, brands[_brandName].expiredOn, now);
+        BrandEvent("UPDATED", _businessId, _brandSerialId, _additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn, now);
     }
     
-    function destroyBrand(string _brandName){
-        require(isBrandRegistered[_brandName] == true);
-        brands[_brandName].isLive = false;
-        brands[_brandName].expiredOn = now; 
+    function destroyBrand(string _brandSerialId){
+        require(isBrandRegistered[_brandSerialId] == true);
+        brands[_brandSerialId].isLive = false;
+        brands[_brandSerialId].expiredOn = now; 
         
-        BrandEvent("DESTROYED", brands[_brandName].businessId, _brandName, brands[_brandName].additionalParametersJson, brands[_brandName].isUsed, brands[_brandName].isLive, brands[_brandName].expiredOn, now);
+        BrandEvent("DESTROYED", brands[_brandSerialId].businessId, _brandSerialId, brands[_brandSerialId].additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn, now);
     }
    
-    function getBrandDetails(string _brandName) returns(uint, string, bool, bool, uint256){
-        if(isBrandRegistered[_brandName] == true)
-        return (brands[_brandName].businessId, brands[_brandName].additionalParametersJson, brands[_brandName].isUsed, brands[_brandName].isLive, brands[_brandName].expiredOn);
+    function getBrandDetails(string _brandSerialId) returns(uint, string, bool, bool, uint256){
+        if(isBrandRegistered[_brandSerialId] == true)
+        return (brands[_brandSerialId].businessId, brands[_brandSerialId].additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn);
         else
         return (0, "null", false, false, 0);
     }
     
-    function registerBrandImage(uint32 _brandImageHash, string _brandName, string _imageTitle, string _imageDescription){
-        require(isBrandImageRegistered[_brandImageHash] == false && isBrandRegistered[_brandName] == true);
-        brandImages[_brandImageHash].brandName = _brandName;
+    function registerBrandImage(uint32 _brandImageHash, string _brandSerialId, string _imageTitle, string _imageDescription){
+        require(isBrandImageRegistered[_brandImageHash] == false && isBrandRegistered[_brandSerialId] == true);
+        brandImages[_brandImageHash].brandSerialId = _brandSerialId;
         brandImages[_brandImageHash].imageTitle = _imageTitle;
         brandImages[_brandImageHash].imageDescription = _imageDescription;
         isBrandImageRegistered[_brandImageHash] = true;
-        brands[_brandName].isUsed = true;
+        brands[_brandSerialId].isUsed = true;
         
-        BrandImageEvent("REGISTERED", _brandName, _brandImageHash, _imageTitle, _imageDescription, now);
-        BrandEvent("UPDATED", brands[_brandName].businessId, _brandName, brands[_brandName].additionalParametersJson, brands[_brandName].isUsed, brands[_brandName].isLive, brands[_brandName].expiredOn, now);
+        BrandImageEvent("REGISTERED", _brandSerialId, _brandImageHash, _imageTitle, _imageDescription, now);
+        BrandEvent("UPDATED", brands[_brandSerialId].businessId, _brandSerialId, brands[_brandSerialId].additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn, now);
     }
     
-    function updateBrandImage(uint32 _brandImageHash, string _brandName, string _imageTitle, string _imageDescription){
+    function updateBrandImage(uint32 _brandImageHash, string _brandSerialId, string _imageTitle, string _imageDescription){
         require(isBrandImageRegistered[_brandImageHash] == true);
-        brandImages[_brandImageHash].brandName = _brandName;
+        brandImages[_brandImageHash].brandSerialId = _brandSerialId;
         brandImages[_brandImageHash].imageTitle = _imageTitle;
         brandImages[_brandImageHash].imageDescription = _imageDescription;
         
-        BrandImageEvent("UPDATED", _brandName, _brandImageHash, _imageTitle, _imageDescription, now);
+        BrandImageEvent("UPDATED", _brandSerialId, _brandImageHash, _imageTitle, _imageDescription, now);
     }
     
     function getBrandImageDetails(uint32 _brandImageHash) returns(string, string, string){
         if(isBrandImageRegistered[_brandImageHash] == true)
-        return (brandImages[_brandImageHash].brandName, brandImages[_brandImageHash].imageTitle, brandImages[_brandImageHash].imageDescription);
+        return (brandImages[_brandImageHash].brandSerialId, brandImages[_brandImageHash].imageTitle, brandImages[_brandImageHash].imageDescription);
         else
         return ("null", "null", "null");
     }

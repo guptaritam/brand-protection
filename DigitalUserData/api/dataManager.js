@@ -22,11 +22,35 @@ var dataManagerContractABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_brandName",
+				"name": "_businessId",
+				"type": "uint256"
+			},
+			{
+				"name": "_businessName",
+				"type": "string"
+			},
+			{
+				"name": "_businessAddress",
+				"type": "string"
+			},
+			{
+				"name": "_businessCity",
+				"type": "string"
+			},
+			{
+				"name": "_businessState",
+				"type": "string"
+			},
+			{
+				"name": "_businessCountryCode",
+				"type": "string"
+			},
+			{
+				"name": "_businessZipCode",
 				"type": "string"
 			}
 		],
-		"name": "destroyBrand",
+		"name": "registerBusiness",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -36,7 +60,33 @@ var dataManagerContractABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_brandName",
+				"name": "_brandImageHash",
+				"type": "uint32"
+			},
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_imageTitle",
+				"type": "string"
+			},
+			{
+				"name": "_imageDescription",
+				"type": "string"
+			}
+		],
+		"name": "registerBrandImage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandSerialId",
 				"type": "string"
 			}
 		],
@@ -98,46 +148,7 @@ var dataManagerContractABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_businessId",
-				"type": "uint256"
-			}
-		],
-		"name": "getBusinessDetails",
-		"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			},
-			{
-				"name": "",
-				"type": "string"
-			},
-			{
-				"name": "",
-				"type": "string"
-			},
-			{
-				"name": "",
-				"type": "string"
-			},
-			{
-				"name": "",
-				"type": "string"
-			},
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandName",
+				"name": "_brandSerialId",
 				"type": "string"
 			},
 			{
@@ -150,118 +161,6 @@ var dataManagerContractABI = [
 			}
 		],
 		"name": "registerBrand",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandImageHash",
-				"type": "uint32"
-			},
-			{
-				"name": "_brandName",
-				"type": "string"
-			},
-			{
-				"name": "_imageTitle",
-				"type": "string"
-			},
-			{
-				"name": "_imageDescription",
-				"type": "string"
-			}
-		],
-		"name": "registerBrandImage",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_businessId",
-				"type": "uint256"
-			},
-			{
-				"name": "_businessName",
-				"type": "string"
-			},
-			{
-				"name": "_businessAddress",
-				"type": "string"
-			},
-			{
-				"name": "_businessCity",
-				"type": "string"
-			},
-			{
-				"name": "_businessState",
-				"type": "string"
-			},
-			{
-				"name": "_businessCountryCode",
-				"type": "string"
-			},
-			{
-				"name": "_businessZipCode",
-				"type": "string"
-			}
-		],
-		"name": "registerBusiness",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandName",
-				"type": "string"
-			},
-			{
-				"name": "_businessId",
-				"type": "uint256"
-			},
-			{
-				"name": "_additionalParametersJson",
-				"type": "string"
-			}
-		],
-		"name": "updateBrand",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandImageHash",
-				"type": "uint32"
-			},
-			{
-				"name": "_brandName",
-				"type": "string"
-			},
-			{
-				"name": "_imageTitle",
-				"type": "string"
-			},
-			{
-				"name": "_imageDescription",
-				"type": "string"
-			}
-		],
-		"name": "updateBrandImage",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -301,6 +200,107 @@ var dataManagerContractABI = [
 		],
 		"name": "updateBusiness",
 		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_businessId",
+				"type": "uint256"
+			},
+			{
+				"name": "_additionalParametersJson",
+				"type": "string"
+			}
+		],
+		"name": "updateBrand",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandImageHash",
+				"type": "uint32"
+			},
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_imageTitle",
+				"type": "string"
+			},
+			{
+				"name": "_imageDescription",
+				"type": "string"
+			}
+		],
+		"name": "updateBrandImage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			}
+		],
+		"name": "destroyBrand",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_businessId",
+				"type": "uint256"
+			}
+		],
+		"name": "getBusinessDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -372,7 +372,7 @@ var dataManagerContractABI = [
 			},
 			{
 				"indexed": false,
-				"name": "_brandName",
+				"name": "_brandSerialId",
 				"type": "string"
 			},
 			{
@@ -414,7 +414,7 @@ var dataManagerContractABI = [
 			},
 			{
 				"indexed": false,
-				"name": "_brandName",
+				"name": "_brandSerialId",
 				"type": "string"
 			},
 			{
@@ -506,12 +506,12 @@ dataManagerApiRoutes.post('/updateBusiness', function(req, res) {
 
 dataManagerApiRoutes.post('/registerBrand', function(req, res) {
 
-    var brandName = req.body._brandName;
+    var brandSerialId = req.body._brandSerialId;
     var businessId = req.body._businessId;
     var additionalParametersJson = req.body._additionalParametersJson;
 
 
-    dataManagerContract.registerBrand.sendTransaction(brandName, businessId, additionalParametersJson, {
+    dataManagerContract.registerBrand.sendTransaction(brandSerialId, businessId, additionalParametersJson, {
         from: web3.eth.defaultAccount,
         gas: 400000
     }, function(err, result) {
@@ -528,12 +528,12 @@ dataManagerApiRoutes.post('/registerBrand', function(req, res) {
 
 dataManagerApiRoutes.post('/updateBrand', function(req, res) {
 
-    var brandName = req.body._brandName;
+    var brandSerialId = req.body._brandSerialId;
     var businessId = req.body._businessId;
     var additionalParametersJson = req.body._additionalParametersJson;
 
 
-    dataManagerContract.updateBrand.sendTransaction(brandName, businessId, additionalParametersJson, {
+    dataManagerContract.updateBrand.sendTransaction(brandSerialId, businessId, additionalParametersJson, {
         from: web3.eth.defaultAccount,
         gas: 400000
     }, function(err, result) {
@@ -549,9 +549,9 @@ dataManagerApiRoutes.post('/updateBrand', function(req, res) {
 
 dataManagerApiRoutes.post('/destroyBrand', function(req, res) {
 
-    var brandName = req.body._brandName;
+    var brandSerialId = req.body._brandSerialId;
 
-    dataManagerContract.destroyBrand.sendTransaction(brandName, {
+    dataManagerContract.destroyBrand.sendTransaction(brandSerialId, {
         from: web3.eth.defaultAccount,
         gas: 400000
     }, function(err, result) {
@@ -568,12 +568,12 @@ dataManagerApiRoutes.post('/destroyBrand', function(req, res) {
 dataManagerApiRoutes.post('/registerBrandImage', function(req, res) {
 
     var brandImageHash = req.body._brandImageHash;
-    var brandName = req.body._brandName;
+    var brandSerialId = req.body._brandSerialId;
     var imageTitle = req.body._imageTitle;
     var imageDescription = req.body._imageDescription;
 
 
-    dataManagerContract.registerBrandImage.sendTransaction(brandImageHash, brandName, imageTitle, imageDescription, {
+    dataManagerContract.registerBrandImage.sendTransaction(brandImageHash, brandSerialId, imageTitle, imageDescription, {
         from: web3.eth.defaultAccount,
         gas: 400000
     }, function(err, result) {
@@ -590,12 +590,12 @@ dataManagerApiRoutes.post('/registerBrandImage', function(req, res) {
 dataManagerApiRoutes.post('/updateBrandImage', function(req, res) {
 
     var brandImageHash = req.body._brandImageHash;
-    var brandName = req.body._brandName;
+    var brandSerialId = req.body._brandSerialId;
     var imageTitle = req.body._imageTitle;
     var imageDescription = req.body._imageDescription;
 
 
-    dataManagerContract.updateBrandImage.sendTransaction(brandImageHash, brandName, imageTitle, imageDescription, {
+    dataManagerContract.updateBrandImage.sendTransaction(brandImageHash, brandSerialId, imageTitle, imageDescription, {
         from: web3.eth.defaultAccount,
         gas: 400000
     }, function(err, result) {
@@ -634,9 +634,9 @@ dataManagerApiRoutes.post('/getBusinessDetails', function(req, res) {
 
 dataManagerApiRoutes.post('/getBrandDetails', function(req, res) {
 
-    var brandName = req.body._brandName;
+    var brandSerialId = req.body._brandSerialId;
 
-    dataManagerContract.getBrandDetails.call(brandName, function(err, result) {
+    dataManagerContract.getBrandDetails.call(brandSerialId, function(err, result) {
         console.log(result);
         if (!err) {
 
@@ -664,7 +664,7 @@ dataManagerApiRoutes.post('/getBrandImageDetails', function(req, res) {
 
             //console.log(response);
             res.json({
-                "brandName" : result[0],
+                "brandSerialId" : result[0],
                 "imageTitle" : result[1],
                 "imageDescription" : result[2]
             });
