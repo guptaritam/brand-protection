@@ -151,3 +151,16 @@ ls
 sudo su
 sudo su 
 exit 
+sudo su 
+exit
+sudo su 
+exit
+sudo su 
+exit
+ls
+cd DigitalUserData
+ls
+cd contract
+ls
+sudo su 
+exit

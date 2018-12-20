@@ -61,7 +61,7 @@ var dataManagerContractABI = [
 		"inputs": [
 			{
 				"name": "_brandImageHash",
-				"type": "uint32"
+				"type": "string"
 			},
 			{
 				"name": "_brandSerialId",
@@ -76,7 +76,7 @@ var dataManagerContractABI = [
 				"type": "string"
 			}
 		],
-		"name": "registerBrandImage",
+		"name": "updateBrandImage",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -121,8 +121,56 @@ var dataManagerContractABI = [
 		"constant": false,
 		"inputs": [
 			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_businessId",
+				"type": "uint256"
+			},
+			{
+				"name": "_additionalParametersJson",
+				"type": "string"
+			}
+		],
+		"name": "registerBrand",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "_brandImageHash",
-				"type": "uint32"
+				"type": "string"
+			},
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_imageTitle",
+				"type": "string"
+			},
+			{
+				"name": "_imageDescription",
+				"type": "string"
+			}
+		],
+		"name": "registerBrandImage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandImageHash",
+				"type": "string"
 			}
 		],
 		"name": "getBrandImageDetails",
@@ -140,28 +188,6 @@ var dataManagerContractABI = [
 				"type": "string"
 			}
 		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandSerialId",
-				"type": "string"
-			},
-			{
-				"name": "_businessId",
-				"type": "uint256"
-			},
-			{
-				"name": "_additionalParametersJson",
-				"type": "string"
-			}
-		],
-		"name": "registerBrand",
-		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -221,32 +247,6 @@ var dataManagerContractABI = [
 			}
 		],
 		"name": "updateBrand",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandImageHash",
-				"type": "uint32"
-			},
-			{
-				"name": "_brandSerialId",
-				"type": "string"
-			},
-			{
-				"name": "_imageTitle",
-				"type": "string"
-			},
-			{
-				"name": "_imageDescription",
-				"type": "string"
-			}
-		],
-		"name": "updateBrandImage",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -420,7 +420,7 @@ var dataManagerContractABI = [
 			{
 				"indexed": false,
 				"name": "_brandImageHash",
-				"type": "uint32"
+				"type": "string"
 			},
 			{
 				"indexed": false,

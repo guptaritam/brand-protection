@@ -4,7 +4,7 @@ contract DataManager{
     
     uint businessId;
     string brandSerialId; 
-    uint32 brandImageHash;
+    string brandImageHash;
     
     struct business{
         string businessName;
@@ -33,12 +33,12 @@ contract DataManager{
     mapping(uint => bool) isBusinessRegistered; 
     mapping(string => brand) brands;
     mapping(string => bool) isBrandRegistered;
-    mapping(uint32 => brandImage) brandImages;
-    mapping(uint32 => bool) isBrandImageRegistered;
+    mapping(string => brandImage) brandImages;
+    mapping(string => bool) isBrandImageRegistered;
     
     event BusinessEvent(string _actionPerformed, uint _businessId, string _businessName, string _businessAddress, string _businessCity, string _businessState, string _businessCountryCode, string _businessZipCode, uint256 _timestamp);
     event BrandEvent(string _actionPerformed, uint _businessId, string _brandSerialId,  string _additionalParametersJson, bool _isUsed, bool _isLive, uint256 _expiredOn, uint256 _timestamp);
-    event BrandImageEvent(string _actionPerformed, string _brandSerialId, uint32 _brandImageHash, string _imageTitle, string _imageDescription, uint256 _timestamp);
+    event BrandImageEvent(string _actionPerformed, string _brandSerialId, string _brandImageHash, string _imageTitle, string _imageDescription, uint256 _timestamp);
     
     function registerBusiness(uint _businessId, string _businessName, string _businessAddress, string _businessCity, string _businessState, string _businessCountryCode, string _businessZipCode){
         require(isBusinessRegistered[_businessId] == false);
@@ -107,7 +107,7 @@ contract DataManager{
         return (0, "null", false, false, 0);
     }
     
-    function registerBrandImage(uint32 _brandImageHash, string _brandSerialId, string _imageTitle, string _imageDescription){
+    function registerBrandImage(string _brandImageHash, string _brandSerialId, string _imageTitle, string _imageDescription){
         require(isBrandImageRegistered[_brandImageHash] == false && isBrandRegistered[_brandSerialId] == true);
         brandImages[_brandImageHash].brandSerialId = _brandSerialId;
         brandImages[_brandImageHash].imageTitle = _imageTitle;
@@ -119,7 +119,7 @@ contract DataManager{
         BrandEvent("UPDATED", brands[_brandSerialId].businessId, _brandSerialId, brands[_brandSerialId].additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn, now);
     }
     
-    function updateBrandImage(uint32 _brandImageHash, string _brandSerialId, string _imageTitle, string _imageDescription){
+    function updateBrandImage(string _brandImageHash, string _brandSerialId, string _imageTitle, string _imageDescription){
         require(isBrandImageRegistered[_brandImageHash] == true);
         brandImages[_brandImageHash].brandSerialId = _brandSerialId;
         brandImages[_brandImageHash].imageTitle = _imageTitle;
@@ -128,7 +128,7 @@ contract DataManager{
         BrandImageEvent("UPDATED", _brandSerialId, _brandImageHash, _imageTitle, _imageDescription, now);
     }
     
-    function getBrandImageDetails(uint32 _brandImageHash) returns(string, string, string){
+    function getBrandImageDetails(string _brandImageHash) returns(string, string, string){
         if(isBrandImageRegistered[_brandImageHash] == true)
         return (brandImages[_brandImageHash].brandSerialId, brandImages[_brandImageHash].imageTitle, brandImages[_brandImageHash].imageDescription);
         else
