@@ -22,61 +22,11 @@ var dataManagerContractABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_businessId",
-				"type": "uint256"
-			},
-			{
-				"name": "_businessName",
-				"type": "string"
-			},
-			{
-				"name": "_businessAddress",
-				"type": "string"
-			},
-			{
-				"name": "_businessCity",
-				"type": "string"
-			},
-			{
-				"name": "_businessState",
-				"type": "string"
-			},
-			{
-				"name": "_businessCountryCode",
-				"type": "string"
-			},
-			{
-				"name": "_businessZipCode",
-				"type": "string"
-			}
-		],
-		"name": "registerBusiness",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandImageHash",
-				"type": "string"
-			},
-			{
 				"name": "_brandSerialId",
 				"type": "string"
-			},
-			{
-				"name": "_imageTitle",
-				"type": "string"
-			},
-			{
-				"name": "_imageDescription",
-				"type": "string"
 			}
 		],
-		"name": "updateBrandImage",
+		"name": "destroyBrand",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -121,54 +71,6 @@ var dataManagerContractABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_brandSerialId",
-				"type": "string"
-			},
-			{
-				"name": "_businessId",
-				"type": "uint256"
-			},
-			{
-				"name": "_additionalParametersJson",
-				"type": "string"
-			}
-		],
-		"name": "registerBrand",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandImageHash",
-				"type": "string"
-			},
-			{
-				"name": "_brandSerialId",
-				"type": "string"
-			},
-			{
-				"name": "_imageTitle",
-				"type": "string"
-			},
-			{
-				"name": "_imageDescription",
-				"type": "string"
-			}
-		],
-		"name": "registerBrandImage",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
 				"name": "_brandImageHash",
 				"type": "string"
 			}
@@ -188,80 +90,6 @@ var dataManagerContractABI = [
 				"type": "string"
 			}
 		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_businessId",
-				"type": "uint256"
-			},
-			{
-				"name": "_businessName",
-				"type": "string"
-			},
-			{
-				"name": "_businessAddress",
-				"type": "string"
-			},
-			{
-				"name": "_businessCity",
-				"type": "string"
-			},
-			{
-				"name": "_businessState",
-				"type": "string"
-			},
-			{
-				"name": "_businessCountryCode",
-				"type": "string"
-			},
-			{
-				"name": "_businessZipCode",
-				"type": "string"
-			}
-		],
-		"name": "updateBusiness",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandSerialId",
-				"type": "string"
-			},
-			{
-				"name": "_businessId",
-				"type": "uint256"
-			},
-			{
-				"name": "_additionalParametersJson",
-				"type": "string"
-			}
-		],
-		"name": "updateBrand",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_brandSerialId",
-				"type": "string"
-			}
-		],
-		"name": "destroyBrand",
-		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -301,6 +129,194 @@ var dataManagerContractABI = [
 				"type": "string"
 			}
 		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_businessId",
+				"type": "uint256"
+			},
+			{
+				"name": "_additionalParametersJson",
+				"type": "string"
+			},
+			{
+				"name": "_isUsed",
+				"type": "bool"
+			},
+			{
+				"name": "_isLive",
+				"type": "bool"
+			}
+		],
+		"name": "registerBrand",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandImageHash",
+				"type": "string"
+			},
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_imageTitle",
+				"type": "string"
+			},
+			{
+				"name": "_imageDescription",
+				"type": "string"
+			}
+		],
+		"name": "registerBrandImage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_businessId",
+				"type": "uint256"
+			},
+			{
+				"name": "_businessName",
+				"type": "string"
+			},
+			{
+				"name": "_businessAddress",
+				"type": "string"
+			},
+			{
+				"name": "_businessCity",
+				"type": "string"
+			},
+			{
+				"name": "_businessState",
+				"type": "string"
+			},
+			{
+				"name": "_businessCountryCode",
+				"type": "string"
+			},
+			{
+				"name": "_businessZipCode",
+				"type": "string"
+			}
+		],
+		"name": "registerBusiness",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_businessId",
+				"type": "uint256"
+			},
+			{
+				"name": "_additionalParametersJson",
+				"type": "string"
+			},
+			{
+				"name": "_isUsed",
+				"type": "bool"
+			},
+			{
+				"name": "_isLive",
+				"type": "bool"
+			}
+		],
+		"name": "updateBrand",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_brandImageHash",
+				"type": "string"
+			},
+			{
+				"name": "_brandSerialId",
+				"type": "string"
+			},
+			{
+				"name": "_imageTitle",
+				"type": "string"
+			},
+			{
+				"name": "_imageDescription",
+				"type": "string"
+			}
+		],
+		"name": "updateBrandImage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_businessId",
+				"type": "uint256"
+			},
+			{
+				"name": "_businessName",
+				"type": "string"
+			},
+			{
+				"name": "_businessAddress",
+				"type": "string"
+			},
+			{
+				"name": "_businessCity",
+				"type": "string"
+			},
+			{
+				"name": "_businessState",
+				"type": "string"
+			},
+			{
+				"name": "_businessCountryCode",
+				"type": "string"
+			},
+			{
+				"name": "_businessZipCode",
+				"type": "string"
+			}
+		],
+		"name": "updateBusiness",
+		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -509,11 +525,14 @@ dataManagerApiRoutes.post('/registerBrand', function(req, res) {
     var brandSerialId = req.body._brandSerialId;
     var businessId = req.body._businessId;
     var additionalParametersJson = req.body._additionalParametersJson;
+    var isUsed = req.body._isUsed;
+    var isLive = req.body._isLive;
+console.log(isUsed);
+console.log(isLive);
 
-
-    dataManagerContract.registerBrand.sendTransaction(brandSerialId, businessId, additionalParametersJson, {
+    dataManagerContract.registerBrand.sendTransaction(brandSerialId, businessId, additionalParametersJson, isUsed, isLive, {
         from: web3.eth.defaultAccount,
-        gas: 400000
+        gas: 700000
     }, function(err, result) {
         console.log(result);
         if (!err) {
@@ -531,11 +550,13 @@ dataManagerApiRoutes.post('/updateBrand', function(req, res) {
     var brandSerialId = req.body._brandSerialId;
     var businessId = req.body._businessId;
     var additionalParametersJson = req.body._additionalParametersJson;
+    var isUsed = req.body._isUsed;
+    var isLive = req.body._isLive;
 
 
-    dataManagerContract.updateBrand.sendTransaction(brandSerialId, businessId, additionalParametersJson, {
+    dataManagerContract.updateBrand.sendTransaction(brandSerialId, businessId, additionalParametersJson, isUsed, isLive, {
         from: web3.eth.defaultAccount,
-        gas: 400000
+        gas: 700000
     }, function(err, result) {
         console.log(result);
         if (!err) {

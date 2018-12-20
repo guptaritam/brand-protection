@@ -72,22 +72,24 @@ contract DataManager{
         return ("null", "null", "null", "null", "null", "null");
     }
     
-    function registerBrand(string _brandSerialId, uint _businessId, string _additionalParametersJson){
+    function registerBrand(string _brandSerialId, uint _businessId, string _additionalParametersJson, bool _isUsed, bool _isLive){
         require(isBrandRegistered[_brandSerialId] == false && isBusinessRegistered[_businessId] == true);
         brands[_brandSerialId].businessId = _businessId;
         brands[_brandSerialId].additionalParametersJson = _additionalParametersJson;
-        brands[_brandSerialId].isUsed = false;
-        brands[_brandSerialId].isLive = true;
+        brands[_brandSerialId].isUsed = _isUsed;
+        brands[_brandSerialId].isLive = _isLive;
         brands[_brandSerialId].expiredOn = 0; 
         isBrandRegistered[_brandSerialId] = true;
         
         BrandEvent("REGISTERED", _businessId, _brandSerialId, _additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn, now);
     }
     
-    function updateBrand(string _brandSerialId, uint _businessId, string _additionalParametersJson){
+    function updateBrand(string _brandSerialId, uint _businessId, string _additionalParametersJson, bool _isUsed, bool _isLive){
         require(isBrandRegistered[_brandSerialId] == true);
         brands[_brandSerialId].businessId = _businessId;
         brands[_brandSerialId].additionalParametersJson = _additionalParametersJson;
+        brands[_brandSerialId].isUsed = _isUsed;
+        brands[_brandSerialId].isLive = _isLive;
         
         BrandEvent("UPDATED", _businessId, _brandSerialId, _additionalParametersJson, brands[_brandSerialId].isUsed, brands[_brandSerialId].isLive, brands[_brandSerialId].expiredOn, now);
     }

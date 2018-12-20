@@ -164,3 +164,11 @@ cd contract
 ls
 sudo su 
 exit
+sudo su 
+exit 
+sudo su 
+exit
+sudo su 
+exit
+sudo su 
+exit
